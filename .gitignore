@@ -1,0 +1,10 @@
+build/**
+install/**
+config/**
+log/**
+map/**
+*.log
+latest_build
+latest
+localz/**
+

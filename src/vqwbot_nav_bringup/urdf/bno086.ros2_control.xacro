@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="bno086_ros2_control" params="name">
+
+    <ros2_control name="${name}" type="system">
+      <hardware>
+        <plugin>bno086_hardware_interface/Bno086HardwareInterface</plugin>
+          <param name="spi_port">/dev/spidev0.0</param>
+          <param name="spi_speed" type="int">3000000</param>
+          <param name="sensor_rate_percent" type="int">100</param>
+          <param name="wake_gpio_pin" type="int">17</param>
+          <param name="reset_gpio_pin" type="int">22</param>
+          <param name="int_gpio_pin" type="int">23</param>
+          <param name="boot_gpio_pin" type="int">16</param>
+
+      </hardware>
+
+      <sensor name="imu_sensor">
+        <state_interface name="orientation.x"/>
+        <state_interface name="orientation.y"/>
+        <state_interface name="orientation.z"/>
+        <state_interface name="orientation.w"/>
+        <state_interface name="angular_velocity.x"/>
+        <state_interface name="angular_velocity.y"/>
+        <state_interface name="angular_velocity.z"/>
+        <state_interface name="linear_acceleration.x"/>
+        <state_interface name="linear_acceleration.y"/>
+        <state_interface name="linear_acceleration.z"/>
+
+        <param name="frame_id">imu_link</param>
+
+      </sensor>
+    </ros2_control>
+  </xacro:macro>
+
+</robot>
+
