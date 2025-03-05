@@ -12,25 +12,25 @@ from launch_ros.substitutions import FindPackageShare
 def generate_launch_description():
 
     world_path = PathJoinSubstitution([
-        FindPackageShare('vqwbot_bringup'),
+        FindPackageShare('vqwbot_nav_bringup'),
         'params',
         'vqwbot_world.sdf'
     ])
     
     default_rviz_config_path = PathJoinSubstitution([
-        FindPackageShare('vqwbot_bringup'),
+        FindPackageShare('vqwbot_nav_bringup'),
         'params',
         'vqwbot_sim.rviz'
     ])
     
-    ekf_config_path = PathJoinSubstitution([
-        FindPackageShare('vqwbot_bringup'),
+    ukf_config_path = PathJoinSubstitution([
+        FindPackageShare('vqwbot_nav_bringup'),
         'params',
-        'ekf.yaml'
+        'ukf.yaml'
     ])
     
     xacro_urdf_file_path = PathJoinSubstitution([
-        FindPackageShare('vqwbot_bringup'),
+        FindPackageShare('vqwbot_nav_bringup'),
         'urdf',
         'vqwbot_sim.urdf.xacro'
     ])
@@ -83,10 +83,10 @@ def generate_launch_description():
 
     robot_localization_node = launch_ros.actions.Node(
          package='robot_localization',
-         executable='ekf_node',
-         name='ekf_filter_node',
+         executable='ukf_node',
+         name='ukf_filter_node',
          output='screen',
-         parameters=[ ekf_config_path, {'use_sim_time': LaunchConfiguration('use_sim_time')}]
+         parameters=[ ukf_config_path, {'use_sim_time': LaunchConfiguration('use_sim_time')}]
     )
 
 #         launch.actions.ExecuteProcess(cmd=['gazebo', '--verbose', '-s', 'libgazebo_ros_init.so', '-s', 'libgazebo_ros_factory.so', world_path], output='screen'),

@@ -14,26 +14,19 @@ def generate_launch_description():
     default_rviz2_config_path = PathJoinSubstitution([
         FindPackageShare("vqwbot_nav_bringup"),
         "params",
-        "nav2_default_view.rviz"
+        "fuse.rviz"
     ])
-
-    joint_state_publisher_gui_node = Node(
-        package='joint_state_publisher_gui',
-        executable='joint_state_publisher_gui',
-        name='joint_state_publisher_gui',
-    )
 
     rviz_node = Node(
         package='rviz2',
         executable='rviz2',
         name='rviz2',
         output='screen',
-        arguments=['-d', LaunchConfiguration('rvizconfig')],
+        arguments=['-d', LaunchConfiguration('fuse_rvizconfig')],
     )
 
     nodes = [
-        launch.actions.DeclareLaunchArgument(name='rvizconfig', default_value=default_rviz2_config_path, description='Absolute path to rviz config file'),
-        joint_state_publisher_gui_node,
+        launch.actions.DeclareLaunchArgument(name='fuse_rvizconfig', default_value=default_rviz2_config_path, description='Absolute path to rviz config file'),
         rviz_node,
     ]
 

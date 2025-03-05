@@ -5,6 +5,15 @@
 		},
 		{
 			"path": "../../../opt/ros/jazzy"
+		},
+		{
+			"path": "../.ros/log"
+		},
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../../etc"
 		}
 	],
 	"settings": {
